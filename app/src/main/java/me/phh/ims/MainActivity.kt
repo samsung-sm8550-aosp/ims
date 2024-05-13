@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         val tm = ctxt.getSystemService(TelephonyManager::class.java)
         var network: Network? = null
 
-        nm.registerDefaultNetworkCallback(
+        nm?.registerDefaultNetworkCallback(
             object : ConnectivityManager.NetworkCallback() {
                 override fun onAvailable(n: Network) {
                     Rlog.d("PHH", "Got network available $n")

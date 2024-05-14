@@ -39,10 +39,10 @@ class MainActivity : AppCompatActivity() {
             }
         )
 
-        val mcc = tm.simOperator.substring(0 until 3)
-        var mnc = tm.simOperator.substring(3)
+        val mcc = tm?.simOperator?.substring(0 until 3)
+        var mnc = tm?.simOperator?.substring(3)
         if (mnc.length == 2) mnc = "0$mnc"
-        val imsi = tm.subscriberId
+        val imsi = tm?.subscriberId
 
         Rlog.d("PHH", "Got mcc $mcc mnc $mnc imsi $imsi")
 
@@ -119,7 +119,7 @@ class MainActivity : AppCompatActivity() {
         // set traffic selector?
 
         var ipsecTunnel: Object? = null
-        ipsecManager.javaClass.getMethod(
+        ipsecManager?.javaClass?.getMethod(
             "createIpSecTunnelInterface",
             InetAddress::class.java,
             InetAddress::class.java,
@@ -155,9 +155,9 @@ class MainActivity : AppCompatActivity() {
                             "PHH",
                             "IKE session opened ${p0.ikeSessionConnectionInfo.localAddress} ${p0.ikeSessionConnectionInfo.remoteAddress}"
                         )
-                        Rlog.d("PHH", "Bound network is ${nm.boundNetworkForProcess}")
+                        Rlog.d("PHH", "Bound network is ${nm?.boundNetworkForProcess}")
                         ipsecTunnel =
-                            ipsecManager.javaClass
+                            ipsecManager?.javaClass
                                 .getMethod(
                                     "createIpSecTunnelInterface",
                                     InetAddress::class.java,
@@ -295,7 +295,7 @@ class MainActivity : AppCompatActivity() {
                     override fun onIpSecTransformCreated(p0: IpSecTransform, p1: Int) {
                         Rlog.d("PHH", "IPSec session created $p0 $p1")
 
-                        ipsecManager.javaClass
+                        ipsecManager?.javaClass
                             .getMethod(
                                 "applyTunnelModeTransform",
                                 Class.forName("android.net.IpSecManager\$IpSecTunnelInterface"),
@@ -316,7 +316,7 @@ class MainActivity : AppCompatActivity() {
         Rlog.d("PHH", str)
         runOnUiThread {
             val status = findViewById<TextView>(R.id.status)
-            status.text = str + "\n" + status.text
+            status?.text = str + "\n" + status?.text
         }
     }
     /*

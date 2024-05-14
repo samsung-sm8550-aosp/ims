@@ -50,10 +50,11 @@ class SipHandler(val ctxt: Context) {
         }
     })
 
-    private val subscriptionManager: SubscriptionManager
-    private val telephonyManager: TelephonyManager
-    private val connectivityManager: ConnectivityManager
-    private val ipSecManager: IpSecManager
+    private var subscriptionManager: SubscriptionManager? = null
+    private var telephonyManager: TelephonyManager? = null
+    private var connectivityManager: ConnectivityManager? = null
+    private var ipSecManager: IpSecManager? = null
+    
     init {
         subscriptionManager = ctxt.getSystemService(SubscriptionManager::class.java)
         telephonyManager = ctxt.getSystemService(TelephonyManager::class.java) as? TelephonyManager
